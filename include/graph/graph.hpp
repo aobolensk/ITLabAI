@@ -143,7 +143,9 @@ class Graph {
                             arrayE_.begin() + arrayV_[layerID + 1]);
   }
 
-  [[nodiscard]] int getLayersCount() const { return V_; }
+  [[nodiscard]] int getLayersCount() const {
+    return V_;
+  }
 
   [[nodiscard]] std::shared_ptr<Layer> getLayerFromID(size_t layerID) const {
     if (layerID >= layers_.size()) {
@@ -177,7 +179,9 @@ class Graph {
   }
 
   void addSingleLayer(const std::shared_ptr<Layer>& layer) {
-    if (!layer) return;
+    if (!layer) {
+      return;
+    }
 
     int id = layer->getID();
     bool layer_exists = (id >= 0 && id < V_ && layers_[id] == layer);
@@ -297,7 +301,9 @@ class Graph {
   }
   bool areLayerNext(const std::shared_ptr<Layer>& layPrev,
                     const std::shared_ptr<Layer>& layNext) {
-    if (!layPrev || !layNext) return false;
+    if (!layPrev || !layNext) {
+      return false;
+    }
 
     if (layPrev->getID() >= V_ || layPrev->getID() < 0) {
       throw std::invalid_argument("No such layer in graph");
@@ -429,8 +435,12 @@ class Graph {
         stats.min_time = elapsed_ms;
         stats.max_time = elapsed_ms;
       } else {
-        if (elapsed_ms < stats.min_time) stats.min_time = elapsed_ms;
-        if (elapsed_ms > stats.max_time) stats.max_time = elapsed_ms;
+        if (elapsed_ms < stats.min_time) {
+          stats.min_time = elapsed_ms;
+        }
+        if (elapsed_ms > stats.max_time) {
+          stats.max_time = elapsed_ms;
+        }
       }
 #endif
     }
@@ -450,7 +460,9 @@ class Graph {
   }
 
 #ifdef ENABLE_STATISTIC_TENSORS
-  std::vector<Tensor> getTensors() { return tensors_; }
+  std::vector<Tensor> getTensors() {
+    return tensors_;
+  }
 #endif
 #ifdef ENABLE_STATISTIC_TIME
   std::vector<std::string> getTimeInfo() {
@@ -462,10 +474,14 @@ class Graph {
     }
     return res;
   }
-  std::vector<int> getTime() { return time_; }
+  std::vector<int> getTime() {
+    return time_;
+  }
 #endif
 #ifdef ENABLE_STATISTIC_WEIGHTS
-  std::vector<Tensor> getWEIGHTS() { return weights_; }
+  std::vector<Tensor> getWEIGHTS() {
+    return weights_;
+  }
 #endif
 
   [[nodiscard]] std::vector<std::pair<int, int>> getInOutDegrees() const {
@@ -517,7 +533,9 @@ class Graph {
     std::vector<bool> visited(V_, false);
 
     std::function<void(int)> dfs = [&](int u) {
-      if (visited[u]) return;
+      if (visited[u]) {
+        return;
+      }
       visited[u] = true;
       traversal.push_back(u);
 
